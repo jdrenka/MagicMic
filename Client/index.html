@@ -47,23 +47,146 @@
       <h1>gtpInteraction</h1>
       <h2>get your questions answered right now</h2>
      
-      <div class="image-container">
-        <img id = mic_image src = assets/img/mic-image.png>
-
-      </div>
+      <div id="container">
+    <div id="mic-container">
+        <img id="mic_image" src="assets/img/mic-image.png" alt="Microphone">
+    </div>
+    <div id="response-container">
+        <div id="transcription"></div>
+    </div>
+</div>
       
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
-
   </main><!-- End #main -->
+
+  <!-- Script for SocketConnection-->
+
+  <script>
+  // Initialize WebSocket connection
+  const socket = new WebSocket('ws://localhost:8765');
+
+  // Event handler for WebSocket connection open
+  socket.onopen = function(event) {
+      console.log('WebSocket connection opened');
+  };
+
+  // Event handler for WebSocket message received
+  socket.onmessage = function(event) {
+      console.log('Received message from server:', event.data);
+      document.getElementById('transcription').innerText = event.data;
+  };
+
+  // Event handler for WebSocket error
+  socket.onerror = function(event) {
+      console.error('WebSocket error:', event);
+  };
+
+  // Event handler for WebSocket connection closed
+  socket.onclose = function(event) {
+      console.log('WebSocket connection closed');
+  };
+
+  // Get the start and stop recording buttons
+let mediaRecorder;
+let audioStream;
+let isFirstClick = true;
+  const startButton = document.getElementById('mic_image');
+  
+  // Event listener for start recording button
+  startButton.addEventListener('click', toggleRecording);
+ // Variable to track if it's the first click
+
+async function toggleRecording() {
+    console.log('Toggle recording function called');
+
+    // Check if it's the first time clicking the div
+    if (isFirstClick) {
+        console.log('Starting recording for the first time');
+        startRecording();
+        isFirstClick = false; // Update the flag
+        return; // Exit the function
+    }
+
+    // Check if mediaRecorder is defined and its state
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+        console.log('Stopping recording');
+        // If currently recording, stop recording
+        stopRecording();
+    } else {
+        console.log('Starting recording');
+        // If not currently recording, start recording
+        startRecording();
+    }
+}
+
+
+  function padAudioData(audioData) {
+    // Check if the length of audio data is odd
+    if (audioData.length % 2 !== 0) {
+        // Pad the audio data with an extra byte to make its length even
+        audioData = new Uint8Array([...audioData, 0]);
+    }
+    return audioData;
+}
+
+  // Function to start recording audio
+  async function startRecording() {
+    console.log("recordingStarted");
+    //coloring mic icon
+    document.getElementById('mic_image').classList.add('image-with-shadow');
+      try {
+          audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(audioStream);
+          
+          // Event listener for data available
+          mediaRecorder.ondataavailable = function(event) {
+            if (event.data.size > 0) {
+               // Convert Blob to ArrayBuffer
+                event.data.arrayBuffer().then(buffer => {
+              // Convert ArrayBuffer to Uint8Array
+                  let audioData = new Uint8Array(buffer);
+                  // Pad audio data if needed
+                  audioData = padAudioData(audioData);
+                  // Send padded audio data to server
+                  socket.send(audioData);
+                });
+            }
+          };
+
+          // Start recording
+          mediaRecorder.start();
+          console.log('Recording started');
+          
+          // Update button states
+          startButton.disabled = true;
+      } catch (error) {
+          console.error('Error accessing microphone:', error);
+      }
+  }
+
+  // Function to stop recording audio
+  function stopRecording() {
+    //remove coloring of mic icon
+    document.getElementById('mic_image').classList.remove('image-with-shadow');
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+          mediaRecorder.stop();
+          audioStream.getTracks().forEach(track => track.stop());
+          console.log('Recording stopped');
+      }
+
+      // Update button states
+      startButton.disabled = false;
+  }
+</script>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <h3>About</h3>
-      <p>Powered by OpenAI GTP 4.0 Turbo</p>
+      <p>Powered by OpenAI GTP 4.0 Turbo, Whisper API</p>
       <div class="copyright">
         &copy; Copyright <strong><span>gtpInteraction</span></strong>. All Rights Reserved
       </div>

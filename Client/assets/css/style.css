@@ -258,8 +258,9 @@ h6 {
 }
 
 #mic_image{
-  width:7vw;
-  height:10vw;
+  width:4vw;
+  height:6vw;
+  margin-top: 1vw;
   transform: scale(1.005);
 }
 .image-container {
@@ -274,7 +275,68 @@ h6 {
   object-fit: cover; /* Ensures the image covers the container */
   transition: transform 0.3s ease; /* Smooth scaling transition */
 }
+#stopButton{
+  width: 10vw;
+  height: 3vw;
+  display: inline-block;
+  margin-top: 1vw;
+    padding: 1vw 2vw;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 1vw;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
+#stopButton:hover{
+  background-color: #c0392b;
+}
+
+#transcription{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  margin-top: 1vw;
+  width: 40vw;
+  height: 7vw;
+  font-size: 1.25vw;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  padding: 1vw;
+  border: 4px solid #000000;
+  border-radius: 5px;
+  background-color: #696969;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 95%;
+  overflow-y: auto;
+  max-height: 200px;
+  border-radius: 30px;
+}
+
+#container {
+  display: flex;
+  align-items: center;
+}
+
+#mic-container {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+#response-container {
+  overflow-y: auto;
+  max-height: 200px;
+}
+.image-with-shadow {
+  background-color: red;
+  opacity: 50%;
+  border-radius: 50px;
+}
 .image-container:hover {
   transform: scale(1.11); /* Scales up the container slightly on hover */
 }
