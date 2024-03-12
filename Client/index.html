@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>gtpInteraction</title>
+  <title>MagicMic</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -44,7 +44,7 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h1>gtpInteraction</h1>
+      <h1>MagicMic</h1>
       <h2>get your questions answered right now</h2>
      
       <div id="container">
@@ -53,6 +53,9 @@
     </div>
     <div id="response-container">
         <div id="transcription"></div>
+    </div>
+    <div id="api-response-container">
+      <p id="apiresponse"><p>
     </div>
 </div>
       
@@ -66,6 +69,21 @@
 
   <script>
   // Initialize WebSocket connection
+  let messages = []; 
+
+  function handleUserInput(input) {
+    // Add user message to messages array
+    messages.push({role: "user", content: input})
+    // Example: Send to server for processing (could be on form submit, button click, etc.)
+    // This example assumes you have a function to send messages to your server
+    console.log("meessages test", messages[0]);
+    fetchGPTResponse();
+}
+
+function addSystemMessage(content) {
+    messages.push({role: "system", content: content});
+}
+
   const socket = new WebSocket('ws://localhost:8765');
 
   // Event handler for WebSocket connection open
@@ -77,6 +95,8 @@
   socket.onmessage = function(event) {
       console.log('Received message from server:', event.data);
       document.getElementById('transcription').innerText = event.data;
+      console.log('calling gtpFetch');
+      handleUserInput(event.data);
   };
 
   // Event handler for WebSocket error
@@ -180,6 +200,24 @@ async function toggleRecording() {
       // Update button states
       startButton.disabled = false;
   }
+  async function fetchGPTResponse() {
+    fetch('/send-message', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({messages}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the API response, for example, by displaying the generated text
+        console.log(data);
+        document.getElementById('apiresponse').innerText = data.answer;
+        //add the system (API) response to the messages array for continuity
+        messages.push({role: "system", content: data.answer});
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
 </script>
 
   <!-- ======= Footer ======= -->
