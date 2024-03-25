@@ -7,7 +7,7 @@ import tempfile
 # myenv\Scripts\activate for virtual enviornment script
 async def handle_client(websocket, path):
     print("HANDLING CLIENT")
-    model = whisper.load_model("base")
+    model = whisper.load_model("small")
     try:
         while True:
             # Receive audio data from client

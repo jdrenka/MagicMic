@@ -26,6 +26,14 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 
+#head_4{
+  margin-top: 1.5vw;
+  font-size: 1.5vw;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  color:#0b7cb1;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.543);
+}
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -252,18 +260,26 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/main-background.jpg") top right;
+  background: url("../img/main-background3.jpg") top right;
   background-size: cover;
   position: relative;
+  background-attachment: fixed; 
 }
 
 #mic_image{
-  width:4vw;
-  height:6vw;
+  width:15vw;
+  height:10vw;
   margin-top: 1vw;
-  margin-left: 18vw;
+  margin-left: 34vw;
   transform: scale(1.005);
+  border-radius: 12vw;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  box-shadow: 0 0 5px 3px rgba(255, 255, 255, 0.7);
+ 
 }
+
+
 .image-container {
   position: relative;
   width: 7vw; /* Adjust based on your image size */
@@ -282,7 +298,7 @@ h6 {
   display: inline-block;
   margin-top: 1vw;
     padding: 1vw 2vw;
-    background-color: #e74c3c;
+    background-color: rgba(114, 35, 35, 0.517);
     color: #fff;
     font-size: 1vw;
     font-weight: bold;
@@ -294,7 +310,7 @@ h6 {
 }
 
 #stopButton:hover{
-  background-color: #c0392b;
+  background-color: rgba(114, 35, 35, 0.517);
 }
 
 #transcription{
@@ -309,11 +325,15 @@ h6 {
   color: #ffffff;
   padding-top: 8vw;
   padding: 1vw;
+  min-height: 8vw;
+  max-height: 8vw;
+  min-width: 79vw;
+  max-width: 79vw;
   border: 4px solid #000000;
   border-radius: 5px;
-  background-color: #696969;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 95%;
+  background-color: rgb(21, 24, 26);
+  box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.6);
+  opacity: 96%;
   overflow: auto; /* or overflow-y: auto; for vertical scroll */
   -webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
@@ -326,44 +346,42 @@ h6 {
 }
 
 
-#apiresponse{
-  display: flex;
+#apiresponse {
   position: relative;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Arial', sans-serif;
-  margin-top: 1vw;
   font-size: 1.25vw;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #ffffff;
-  padding-top: 10vw;
-  padding-left: 2vw;
-  padding-right: 2vw;
+  padding: 2vw;
   border: 4px solid #000000;
-  border-radius: 5px;
-  background-color: #696969;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 95%;
-  max-height: 200px;
   border-radius: 30px;
-  margin-left: 0vw;
-  height: 8vw;
-  overflow-anchor: none;
-  overflow: auto; /* or overflow-y: auto; for vertical scroll */
-  -webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
+  background-color: rgb(21, 24, 26);
+  box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.6);
+  opacity: 96%;
+  overflow: auto; /* Enables scrolling */
+  max-height: 16vw; /* Consider adjusting based on your design */
+  min-height: 16vw;
+  min-width: 79vw;
+  max-width: 79vw;
+  margin: 0; /* Adjusted for simplicity, set as needed */
+  /* Scrollbar customization */
+  -webkit-scrollbar: none; /* Consider removing to allow scrolling indication */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
-#api-response-container {
-  width: 40vw;
-  height: 7vw;
-  padding-top: 20px; /* Adjust the padding as needed */
- 
-}
 
+/* For webkit browsers like Chrome, Safari */
+#apiresponse::-webkit-scrollbar {
+  display: none;
+}
+#response-container, #api-response-container {
+  padding: 10px; /* Adjust padding as needed */
+  overflow-y: auto; /* Adds a scrollbar if the content overflows vertically */
+  max-height: 500px; /* Adjust maximum height as needed */
+  word-wrap: break-word; /* Ensures long words do not cause horizontal overflow */
+  width: 85vw;
+  justify-content: center;
+}
 #container {
   padding-top:10px;
   align-items: center;
@@ -373,16 +391,11 @@ h6 {
   margin-right: 10px; /* Adjust as needed */
 }
 
-#response-container {
-  overflow-y: auto;
-  box-sizing: border-box;
-  width: 40vw;
-  height: 5vw;
-}
+
 .image-with-shadow {
-  background-color: red;
+  background-color: rgb(156, 11, 11);
   opacity: 50%;
-  border-radius: 50px;
+  border-radius: 109px;
 }
 .image-container:hover {
   transform: scale(1.11); /* Scales up the container slightly on hover */
@@ -417,10 +430,11 @@ h6 {
 }
 
 #hero h1 {
-  margin: 0 0 1vw 0;
-  font-size: 5vw;
+  margin-top: 4vw;
+  font-size: 6vw;
   font-family: "Satisfy", serif;
   color: #fff;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
 }
 
 #hero h2 {
@@ -613,8 +627,9 @@ section {
   color: #fff;
   font-size: 14px;
   text-align: center;
-  padding: 80px 0;
+  padding: 30px 0;
   position: relative;
+  
 }
 
 #footer::before {
@@ -648,35 +663,16 @@ section {
   margin: 0 0 40px 0;
 }
 
-#footer .social-links {
-  margin: 0 0 40px 0;
-}
-
-#footer .social-links a {
-  font-size: 18px;
-  display: inline-block;
-  background: #ffb727;
-  color: #fff;
-  line-height: 1;
-  padding: 8px 0;
-  margin-right: 4px;
-  border-radius: 50%;
-  text-align: center;
-  width: 36px;
-  height: 36px;
-  transition: 0.3s;
-}
-
-#footer .social-links a:hover {
-  background: #f3a200;
-  color: #fff;
-  text-decoration: none;
-}
-
 #footer .copyright {
-  margin: 0 0 5px 0;
+  margin-top: 5px;
+  font-size: 10px;
 }
 
 #footer .credits {
+  margin-top: 5px;
   font-size: 13px;
+}
+
+#poweredby{
+  padding: 0;
 }
