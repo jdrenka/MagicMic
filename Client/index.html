@@ -1,39 +1,34 @@
+
+<!--  MagicMic Front End --!> 
+<!-- Author: Justin Drenka -> jpdrenka@gmail.com -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>MagicMic</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
-
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
+  <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
- 
-
-  
-
-  <!-- ======= Hero Section ======= -->
+  <!-- First Elements -->
   <section id="hero">
     <div class="hero-container">
             
@@ -41,44 +36,41 @@
       <h3 id = 'head_4'>Get your questions answered right now.</h3>
      
       <div id="container">
-    <div id="mic-container">
-        <img id="mic_image" src="assets/img/mic-image.png" alt="Microphone">
-    </div>
-    <div id="response-container">
-        <div id="transcription"></div>
-    </div>
-    <div id="api-response-container">
-      <div class = "fadetext">
-      <p id="apiresponse"><p>
+        <div id="mic-container">
+          <img id="mic_image" src="assets/img/mic-image.png" alt="Microphone">
+        </div>
+        <div id="response-container">
+          <div id="transcription">            
+          </div>
+        </div>
+        
+        <div id="api-response-container">
+          <div class = "fadetext">
+            <p id="apiresponse"><p>
+          </div>
+        </div>
       </div>
-    </div>
-</div>
       
-    </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
-  </main><!-- End #main -->
+  </div>
+</section
 
   <!-- Script for SocketConnection-->
-
-  <script>
-  // Initialize WebSocket connection
-  let messages = []; 
+<script>
+  
+  let messages = [];
 
   function handleUserInput(input) {
     // Add user message to messages array
     messages.push({role: "user", content: input})
-    // Example: Send to server for processing (could be on form submit, button click, etc.)
-    // This example assumes you have a function to send messages to your server
     console.log("meessages test", messages[0]);
-    fetchGPTResponse();
-}
+    fetchGPTResponse();  // Call fetchGPTResponse() which sends the String message to our server endpoint with POST
+  }
 
-function addSystemMessage(content) {
+  function addSystemMessage(content) {
     messages.push({role: "system", content: content});
-}
+  }
 
+  //Initializing socket 
   const socket = new WebSocket('ws://localhost:8765');
 
   // Event handler for WebSocket connection open
@@ -105,23 +97,23 @@ function addSystemMessage(content) {
   };
 
   // Get the start and stop recording buttons
-let mediaRecorder;
-let audioStream;
-let isFirstClick = true;
+  let mediaRecorder;
+  let audioStream;
+  let isFirstClick = true;
   const startButton = document.getElementById('mic_image');
   
   // Event listener for start recording button
   startButton.addEventListener('click', toggleRecording);
  // Variable to track if it's the first click
 
-async function toggleRecording() {   //Mic clicked
+  async function toggleRecording() {   //Mic clicked
 
-  var resultDiv = document.getElementById('apiresponse');
+    var resultDiv = document.getElementById('apiresponse');
 
-  document.getElementById('apiresponse').innerText = '';
-  document.getElementById('transcription').innerText = '';
+    document.getElementById('apiresponse').innerText = '';
+    document.getElementById('transcription').innerText = '';
   
-  // Check if it's the first time clicking the div
+    // Check if it's the first time clicking the div
     if (isFirstClick) {
         console.log('Starting recording for the first time');
         startRecording();
@@ -142,64 +134,65 @@ async function toggleRecording() {   //Mic clicked
 }
 
 
-  function padAudioData(audioData) {
+function padAudioData(audioData) {
     // Check if the length of audio data is odd
     if (audioData.length % 2 !== 0) {
-        // Pad the audio data with an extra byte to make its length even
+        // Pad the audio data with an extra byte to make CERTAIN its length even
         audioData = new Uint8Array([...audioData, 0]);
     }
     return audioData;
 }
 
-  // Function to start recording audio
-  async function startRecording() {
+// Function to start recording audio
+async function startRecording() {
     console.log("recordingStarted");
-    //coloring mic icon
-    document.getElementById('mic_image').classList.add('image-with-shadow');
-      try {
-          audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          mediaRecorder = new MediaRecorder(audioStream);
+    
+    document.getElementById('mic_image').classList.add('image-with-shadow'); //Adds color effect to show mic button was clicked and audio is recording to user. 
+    try {
+        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(audioStream);
           
-          // Event listener for data available
-          mediaRecorder.ondataavailable = function(event) {
-            if (event.data.size > 0) {
-               // Convert Blob to ArrayBuffer
-                event.data.arrayBuffer().then(buffer => {
+        // Event listener for data available
+        mediaRecorder.ondataavailable = function(event) {
+          if (event.data.size > 0) {
+              // Convert Blob to ArrayBuffer
+              event.data.arrayBuffer().then(buffer => {
               // Convert ArrayBuffer to Uint8Array
-                  let audioData = new Uint8Array(buffer);
-                  // Pad audio data if needed
-                  audioData = padAudioData(audioData);
-                  // Send padded audio data to server
-                  socket.send(audioData);
-                });
-            }
-          };
-
-          // Start recording
-          mediaRecorder.start();
-          console.log('Recording started');
-          
-          // Update button states
-          startButton.disabled = true;
+              let audioData = new Uint8Array(buffer);
+              // Pad audio data 
+              audioData = padAudioData(audioData);
+              // Send padded audio data to server
+              socket.send(audioData);
+              });
+          }
+        };
+      
+        // Start recording
+        mediaRecorder.start();
+        console.log('Recording started');
+      
+        // Update button states
+        startButton.disabled = true;
       } catch (error) {
-          console.error('Error accessing microphone:', error);
+        console.error('Error accessing microphone:', error);
       }
   }
 
   // Function to stop recording audio
-  function stopRecording() {
+function stopRecording() {
     //remove coloring of mic icon
     document.getElementById('mic_image').classList.remove('image-with-shadow');
-      if (mediaRecorder && mediaRecorder.state === 'recording') {
-          mediaRecorder.stop();
-          audioStream.getTracks().forEach(track => track.stop());
-          console.log('Recording stopped');
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        audioStream.getTracks().forEach(track => track.stop());
+        console.log('Recording stopped');
       }
 
-      // Update button states
-      startButton.disabled = false;
+    // Update button states
+    startButton.disabled = false;
   }
-  async function fetchGPTResponse() {
+  
+async function fetchGPTResponse() {
     fetch('/send-message', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -207,11 +200,11 @@ async function toggleRecording() {   //Mic clicked
     })
     .then(response => response.json())
     .then(data => {
-        // Handle the API response, for example, by displaying the generated text
+        // Handle the API response, display generated output text
         console.log(data);
-        document.getElementById('apiresponse').innerText = data.answer;
-        //add the system (API) response to the messages array for continuity
-        messages.push({role: "system", content: data.answer});
+        document.getElementById('apiresponse').innerText = data.answer; // Adding the generated output text to the UI. 
+        
+        messages.push({role: "system", content: data.answer}); //Adding this message to the messages array for conversational context
     })
     .catch(error => console.error('Error:', error));
 }
@@ -231,7 +224,7 @@ async function toggleRecording() {   //Mic clicked
         &copy; Copyright <strong><span>MagicMic</span></strong>. All Rights Reserved
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   
 
