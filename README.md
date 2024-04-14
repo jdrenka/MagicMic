@@ -19,33 +19,33 @@
 # System Walkthrough
 
 ![Alt text](sampleImages/magicmic1.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 ![Alt text](sampleImages/magicmic2.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 ![Alt text](sampleImages/magicmic3.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 ![Alt text](sampleImages/magicmic4.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 ![Alt text](sampleImages/magicmic5.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 ![Alt text](sampleImages/magicmic6.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 ![Alt text](sampleImages/magicmic7.PNG "Optional title")
-
-
-
+<br>
+---
+<br>
 
 ## These Files are missing from repo due to large file size
    - whisperAPIServer/myenv/Lib/site-packages/torch/lib/torch_cpu.dll
