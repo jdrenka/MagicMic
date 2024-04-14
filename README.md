@@ -11,7 +11,7 @@
    
    This detailed response is now displayed to the user in a second display containing the answer to their initial question
 
-![Alt text](images/filename.jpg "Optional title")
+![Alt text](sampleImages/ "Optional title")
 
 
 ## These Files are missing from repo due to large file size
