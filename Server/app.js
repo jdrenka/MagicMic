@@ -1,4 +1,7 @@
-//Requires and uses
+
+// MagicMic Server
+// Author: Justin Drenka -> jpdrenka@gmail.com
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
