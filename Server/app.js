@@ -11,13 +11,12 @@ const OPENAI_API_KEY = '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';
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.json());
 
-//Gets 
+
 app.get('/', (req, res) => {
   res.redirect('Client/index.html');
 });
 
-//Posts
-
+//Takes message from req body and sends it to OpenAI API
 app.post('/send-message', async (req, res) => {
   const { messages } = req.body;
 
