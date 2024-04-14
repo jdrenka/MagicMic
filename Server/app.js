@@ -7,7 +7,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-const OPENAI_API_KEY = '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';
+const OPENAI_API_KEY = 'secret';
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.json());
 
