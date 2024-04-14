@@ -21,7 +21,7 @@
 ![Alt text](sampleImages/magicmic1.PNG "Optional title")
 
 ---
-<br>
+
 ![Alt text](sampleImages/magicmic2.PNG "Optional title")
 
 ---
