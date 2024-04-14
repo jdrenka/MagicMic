@@ -11,7 +11,7 @@
    
    This detailed response is now displayed to the user in a second display containing the answer to their initial question
 
-#System Walkthrough
+# System Walkthrough
 
 ![Alt text](sampleImages/magicmic1.PNG "Optional title")
 
