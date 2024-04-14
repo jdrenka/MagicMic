@@ -5,6 +5,9 @@ import numpy as np
 import os
 import tempfile
 # myenv\Scripts\activate for virtual enviornment script
+# Flask Audio Socket Server
+# Author: Justin Drenka -> jpdrenka@gmail.com
+
 async def handle_client(websocket, path):
     print("HANDLING CLIENT")
     model = whisper.load_model("small")
