@@ -11,7 +11,21 @@
    
    This detailed response is now displayed to the user in a second display containing the answer to their initial question
 
+#System Walkthrough
+
 ![Alt text](sampleImages/magicmic1.PNG "Optional title")
+
+![Alt text](sampleImages/magicmic2.PNG "Optional title")
+
+![Alt text](sampleImages/magicmic3.PNG "Optional title")
+
+![Alt text](sampleImages/magicmic4.PNG "Optional title")
+
+![Alt text](sampleImages/magicmic5.PNG "Optional title")
+
+![Alt text](sampleImages/magicmic6.PNG "Optional title")
+
+![Alt text](sampleImages/magicmic7.PNG "Optional title")
 
 
 ## These Files are missing from repo due to large file size
