@@ -11,6 +11,8 @@
    
    This detailed response is now displayed to the user in a second display containing the answer to their initial question
 
+![Example Image](https://cdn.mos.cms.futurecdn.net/39CUYMP8vJqHAYGVzUghBX-1200-80.jpg)
+
 ## These Files are missing from repo due to large file size
    - whisperAPIServer/myenv/Lib/site-packages/torch/lib/torch_cpu.dll
    - whisperAPIServer/myenv/Lib/site-packages/torch/lib/dnnl.lib
