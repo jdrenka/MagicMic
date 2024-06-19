@@ -6,7 +6,7 @@
 # What is MagicMic?
    MagicMic is a simple web application that records a users question from their microphone
    
-   This recorded question is then translated to text very accuratley using OpenAI - Whisper API
+   This recorded question is then translated to text very accurately using OpenAI - Whisper API
    
    The translated text is shown to the user for clarity
    
